@@ -2,15 +2,21 @@
 #define __PROGRAMERSTATUS_HPP__
 
 #include "Subject.cpp"
+#include <mutex>
 
 class ProgramerStatus:public Subject
 {
+
+
 public:
-    ProgramerStatus();
+    static ProgramerStatus* getInstance();
     ~ProgramerStatus();
 
-//private:
     void programerStatusChange();
+
+
+private:
+    ProgramerStatus();
 
 };
 

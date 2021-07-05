@@ -15,6 +15,7 @@ class ProgramerShow:public ObserverInterface,public DisplayInterface
 {
 public:
     ProgramerShow();
+    ProgramerShow(std::string programe_name);
     ~ProgramerShow();
 
 
@@ -22,6 +23,9 @@ public:
     virtual void update();
 
     virtual void show();
+
+private:
+    std::string m_programe_name;
 
 };
 
