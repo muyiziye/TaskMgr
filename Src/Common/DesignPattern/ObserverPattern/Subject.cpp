@@ -9,7 +9,6 @@ void  Subject::registerMonitor(std::shared_ptr<ObserverInterface>& test)
     auto it = m_observerList.begin();
     for(; it != m_observerList.end(); it++)
     {
-        //if ((*it).get() == test.get())
         if (*it == test)
         {
             find = true;

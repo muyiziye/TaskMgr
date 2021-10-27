@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <mutex>
+#include "streambuf"
+#include "fstream"
 
 typedef struct{
     bool save_to_file;
@@ -34,6 +36,8 @@ public:
 
     ~LogSystem();
 
+    void print_log(LOG_LEVEL log_level);
+
 
 // 私有成员函数
 private:
@@ -45,8 +49,35 @@ private:
     LOG_SAVED_TARGET    m_log_saved_tgt;    // 记录日志保存的位置
     std::string         m_log_file_name;    // 记录日志存放的文件
     unsigned int        m_log_max_size;     // 记录日志文件最大空间占用，单位(M)
-    static std::mutex   m_instance_mutex;   // 保护日志实例为单利的信号量
     std::mutex          m_write_log_mutex;  // 保护日志记录的信号量
+};
+
+
+class my_buf : public std::streambuf
+{
+public:
+    my_buf(std::streambuf* buf1, std::streambuf* buf2)
+        : buf1(buf1),
+          buf2(buf2)
+    {}
+
+private:
+    virtual int overflow(int c);
+    virtual int sync();
+
+private:
+    std::streambuf* buf1;
+    std::streambuf* buf2;
+
+};
+
+class my_stream : public std::ostream
+{
+public:
+    my_stream(std::ostream& out1, std::ostream& out2);
+
+private:
+    my_buf buf;
 };
 
 #endif // !__LOG_SYSTEM_HPP__

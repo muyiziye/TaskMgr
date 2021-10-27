@@ -9,6 +9,9 @@ add_definitions("-Wall -lpthread -g -Werror")
 
 message("=============="${TaskMrg_SOURCE_DIR})
 
-add_subdirectory(${TaskMrg_SOURCE_DIR}/Src/)
+set(install_dir ${TaskMrg_SOURCE_DIR}/Bin/)
 
-# install()
+SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
+SET(CMAKE_INSTALL_RPATH "\${ORIGIN}")
+
+add_subdirectory(${TaskMrg_SOURCE_DIR}/Src/)

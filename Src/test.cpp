@@ -1,12 +1,11 @@
 #include <iostream>
 #include <ctime>
-#include <ProgramerStatus.hpp>
-#include <ProgramerShow.hpp>
+#include "ProgramerStatus.hpp"
+#include "ProgramerShow.hpp"
+#include "LogSystem.hpp"
 
 int main()
 {
-    std::cout << "test" << std::endl;
-
     time_t now = time(0);
     char * dt = ctime(&now);
     std::cout << dt << std::endl;
@@ -22,6 +21,10 @@ int main()
 
     ProgramerStatus::getInstance()->removeMonitor(show_1);
     ProgramerStatus::getInstance()->removeMonitor(show_2);
+
+    std::cout << "test" << std::endl;
+    LogSystem::getInstance()->print_log(LOG_INFO);
+    std::cout << "test endl" << std::endl;
     
     std::cout << dt << std::endl;
     return 0;
