@@ -2,16 +2,13 @@
 #include <ctime>
 #include "ProgramerStatus.hpp"
 #include "ProgramerShow.hpp"
-#include "LogSystem.hpp"
+#include "logSystem.hpp"
 
 int main()
 {
     time_t now = time(0);
     char * dt = ctime(&now);
-    std::cout << dt << std::endl;
+	LOG_ERR("Just show the %d log\n", *dt);
 
-    LogSystem::getInstance()->print_log(LOG_INFO);
-    
-    std::cout << dt << std::endl;
     return 0;
 }
